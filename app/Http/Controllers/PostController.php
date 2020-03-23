@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
+use Session;
 
 class PostController extends Controller
 {
@@ -34,7 +36,22 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        # validate
+        $request->validate([
+            'title' => 'required|unique:posts|max:255|min:3',
+            'body' => 'required'
+        ]);
+
+        # Store in database
+        $post = new Post;
+        $post->title = $request['title'];
+        $post->body = $request['body'];
+        $post->save();
+
+        Session::flash('success', 'The blog post was successfully saved!');
+
+         return redirect()->route('posts.show', $post->id);
+
     }
 
     /**
@@ -45,7 +62,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        return view('posts.show')->withPost($post);
     }
 
     /**

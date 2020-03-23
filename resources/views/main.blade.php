@@ -8,6 +8,7 @@
    <div id="blog-navbar-react"></div>
 
     <div class="container">
+        @include('partials._messages')
         @yield('content')
         @include('partials._footer')
     </div> <!-- end of container -->
