@@ -52,7 +52,6 @@ class PostController extends Controller
         Session::flash('success', 'The blog post was successfully saved!');
 
          return redirect()->route('posts.show', $post->id);
-
     }
 
     /**
@@ -76,7 +75,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('posts.edit')->withPost($post);
     }
 
     /**
@@ -88,7 +88,22 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+     # validate
+        $request->validate([
+            'title' => 'required|max:255|min:3',
+            'body' => 'required'
+        ]);  
+        
+        $post = Post::findOrFail($id);
+        $post->title = $request['title'];
+        $post->body = $request['body'];
+
+        $post->save();
+
+        Session::flash('success', 'The blog post was successfully Updated!');
+
+        return redirect()->route('posts.show', $post->id);
+
     }
 
     /**
