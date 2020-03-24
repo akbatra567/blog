@@ -12,6 +12,9 @@
 */
 
 Route::group(['middleware' => ['web']], function(){
+
+    Route::get('/blog/{slug}', 'BlogController@single')->name('blog.single')->where('slug', '[\w\d\-\_]+');
+
     Route::get('/', 'PagesController@index')->name('home');
     Route::get('/about', 'PagesController@about')->name('about');
     Route::get('/contact', 'PagesController@contact')->name('contact');

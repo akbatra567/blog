@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all(); 
+        $posts = Post::orderBy('id', 'desc')->paginate(5); 
         return view('posts.index')->withPosts($posts);
     }
 
@@ -40,12 +40,14 @@ class PostController extends Controller
         # validate
         $request->validate([
             'title' => 'required|unique:posts|max:255|min:3',
+            'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
             'body' => 'required'
         ]);
 
         # Store in database
         $post = new Post;
         $post->title = $request['title'];
+        $post->slug = $request['slug'];
         $post->body = $request['body'];
         $post->save();
 
@@ -88,14 +90,28 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-     # validate
-        $request->validate([
-            'title' => 'required|max:255|min:3',
-            'body' => 'required'
-        ]);  
+
+        # validate
+
+        $post = Post::find($id);
+        if($request->input('slug') == $post->slug)
+        {
+            $request->validate([
+                'title' => 'required|max:255|min:3',
+                'body' => 'required'
+            ]);    
+        }else {
+            $request->validate([
+                'title' => 'required|max:255|min:3',
+                'slug' => 'required|alpha_dash|min:5|max:255',
+                'body' => 'required'
+            ]);
+        }
+          
         
         $post = Post::findOrFail($id);
         $post->title = $request['title'];
+        $post->slug = $request['slug'];
         $post->body = $request['body'];
 
         $post->save();
@@ -114,6 +130,10 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->delete();
+        Session::flash('success', 'The blog post was successfully Deleted!');
+        return redirect()->route('posts.index');
+
     }
 }

@@ -1,4 +1,4 @@
-@extends('./../main')
+@extends('layouts.main')
 @section('title', '| About')
 @section('content')
     <div class="row">

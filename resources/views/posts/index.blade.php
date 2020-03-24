@@ -1,4 +1,4 @@
-@extends('main')
+@extends('layouts.main')
 @section('title', '| All Posts')
 @section('content')
     <div class="row">
@@ -33,5 +33,7 @@
                 @endforeach
             </tbody>
         </table>
+        
+        <div class="text-center">{!! $posts->links() !!}</div>
     </div>
 @stop

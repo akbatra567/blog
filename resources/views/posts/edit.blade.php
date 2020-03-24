@@ -1,4 +1,4 @@
-@extends('main')
+@extends('layouts.main')
 
 @section('title', '| Edit Blog Post')
 
@@ -6,10 +6,13 @@
 {!! Form::model($post, ['route' => ['posts.update', $post->id], 'method' => 'PUT']) !!}
     <div class="row">
         <div class="col-md-8">
-            {{ Form::label('title', "Title") }}
+            {{ Form::label('title', "Title:") }}
             {{ Form::text('title', null, ['class' => 'form-control']) }}
             
-            {{ Form::label('body ', "Body") }}
+            {{ Form::label('slug', "Slug:") }}
+            {{ Form::text('slug', null, ['class' => 'form-control']) }}
+
+            {{ Form::label('body', "Body:") }}
             {{ Form::textarea('body', null, ['class' => 'form-control']) }}    
         </div>
         <div class="col-md-4">
