@@ -1,4 +1,4 @@
-@extends('./../main')
+@extends('layouts.main')
 @section('title', '| Contact')
 @section('content')
     <h2> Contact Form </h2>

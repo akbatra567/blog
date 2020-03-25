@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
 
 class PagesController extends Controller
 {
@@ -13,7 +14,8 @@ class PagesController extends Controller
         # receive data from model
         # compile or process data
         # pass data to correct folder
-        return view('static.welcome');
+        $posts = Post::orderBy('id', 'desc')->limit(3)->get();
+        return view('static.welcome')->withPosts($posts);
     }
 
     public function about(){

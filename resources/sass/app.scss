@@ -6,3 +6,27 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+
+#login .container #login-row #login-column #login-box {
+    margin-top: 5rem;
+    max-width: 600px;
+    border: 1px solid #9C9C9C;
+    // overflow: hidden;
+    box-sizing: border-box;
+
+    #login-form {
+        padding: 20px;
+
+        #register-link {
+            margin-top: -85px;
+            a{
+                &:link, &:visited{
+                    color: black;
+                }
+                
+            }
+        }
+    }
+}
+   

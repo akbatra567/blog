@@ -10882,3 +10882,23 @@ a.text-dark:focus {
   }
 }
 
+#login .container #login-row #login-column #login-box {
+  margin-top: 5rem;
+  max-width: 600px;
+  border: 1px solid #9C9C9C;
+  box-sizing: border-box;
+}
+
+#login .container #login-row #login-column #login-box #login-form {
+  padding: 20px;
+}
+
+#login .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: -85px;
+}
+
+#login .container #login-row #login-column #login-box #login-form #register-link a:link,
+#login .container #login-row #login-column #login-box #login-form #register-link a:visited {
+  color: black;
+}
+
