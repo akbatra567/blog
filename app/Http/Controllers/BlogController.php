@@ -7,9 +7,18 @@ use App\Post;
 
 class BlogController extends Controller
 {
+    
+    public function index()
+    {
+        $posts = Post::paginate(10);
+        return view('blog.index')->withPosts($posts);
+    }
+
     public function single($slug)
     {
         $post = Post::where('slug', '=', $slug)->first();
         return view('blog.single')->withPost($post);
     }
+
+    
 }

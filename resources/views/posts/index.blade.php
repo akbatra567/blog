@@ -33,7 +33,12 @@
                 @endforeach
             </tbody>
         </table>
-        
-        <div class="text-center">{!! $posts->links() !!}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-center">
+            <div class="text-center">
+                {!! $posts->links() !!}
+            </div>
+        </div>
     </div>
 @stop
