@@ -26,7 +26,13 @@
                             </div>
                             <div id="register-link" class="text-right">
                                 <a href="{{ route('register') }}">Register here</a>
+                                @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
+                                @endif
                             </div>
+
                         </form>
                     </div>
                 </div>
