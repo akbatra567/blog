@@ -13,7 +13,8 @@
 
 Route::group(['middleware' => ['web']], function(){
 
-    Auth::routes(['verify' => 'true']);
+    // Auth::routes(['verify' => 'true']);
+    
     // Email Verification Routes 
     Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
     Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
@@ -33,6 +34,11 @@ Route::group(['middleware' => ['web']], function(){
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
     Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
     Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+
+
+    // Categories
+    Route::resource('categories', 'CategoryController')->except('create');
+
 
     // Using slug
     Route::get('/blog/{slug}', 'BlogController@single')->name('blog.single')->where('slug', '[\w\d\-\_]+');

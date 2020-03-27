@@ -18,6 +18,10 @@
                     <dd class="col-md-6"><a href="{{ route('blog.single', $post->slug) }}">{{ route('blog.single', $post->slug) }}</a> </dd>
                 </dl> 
                 <dl class="row">
+                    <dt class="col-md-6">Category:</dt>
+                    <dd class="col-md-6">{{ $post->category->name }}</dd>
+                </dl>
+                <dl class="row">
                     <dt class="col-md-6">Created At:</dt>
                     <dd class="col-md-6">{{ date( 'M j, Y h:ia' ,strtotime($post->created_at)) }}</dd>
                 </dl>
@@ -25,6 +29,7 @@
                     <dt class="col-md-6">Last Updated:</dt>
                     <dd class="col-md-6">{{ date('M j, Y h:ia', strtotime($post->updated_at)) }}</dd>
                 </dl>
+                
                 <hr>
                 <div class="row">
                     <div class="col-md-6">
