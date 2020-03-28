@@ -1,5 +1,7 @@
 @extends('layouts.main')
-
+@section('stylesheets')
+    {{ Html::style('css/select2.min.css') }}
+@endsection
 @section('title', '| Create New Post')
 @section('content')
 
@@ -21,6 +23,14 @@
                     @endforeach
                 </select>
 
+                {{ Form::label('tags', 'Tags:') }}
+                <select name="tags[]" class="form-control select2-multi" multiple="multiple">
+                    @foreach ($tags as $tag)
+                        <option value='{{ $tag->id }}'>{{ $tag->name }}</option> 
+                    @endforeach
+                </select>
+
+
                 {{ Form::label('body', 'Post Body:')  }}
                 {{  Form::textarea('body', null, ['class' => 'form-control' ])}}
                 
@@ -31,4 +41,12 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    {{ Html::script('js/select2.min.js') }} 
+    <script>
+        $('.select2-multi').select2();
+
+    </script>
 @endsection

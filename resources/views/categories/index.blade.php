@@ -9,6 +9,7 @@
                         <th>#</th>
                         <th>Name</th>
                         <th>No. Of Post</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -17,6 +18,9 @@
                             <td> {{ $category->id }} </td>
                             <td> {{ $category->name }} </td>
                             <td> {{ $category->posts->count()  }} </td>
+                            <td>
+                                <a href="{{ route('categories.show', $category->id) }}" class="btn btn-default btn-xs">View</a>
+                            </td>
                         </tr>     
                     @endforeach
                 </tbody>

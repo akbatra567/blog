@@ -15,7 +15,7 @@ class PagesController extends Controller
         # compile or process data
         # pass data to correct folder
         $posts = Post::orderBy('id', 'desc')->limit(3)->get();
-        return view('static.welcome')->withPosts($posts);
+        return view('home.welcome')->withPosts($posts);
     }
 
     public function about(){
@@ -24,11 +24,11 @@ class PagesController extends Controller
         $last = 'Batra';
         $fullname = $first ." ". $last;
         $email = 'akbatra567@gmail.com';
-        return view('static.about')->withFullname($fullname)->withEmail($email);
+        return view('home.about')->withFullname($fullname)->withEmail($email);
     }
 
 
     public function contact(){
-        return view('static.contact');
+        return view('home.contact');
     }
 }

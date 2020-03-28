@@ -5,9 +5,7 @@
   </head>
   <body>
     @include('partials._navbar')
-  {{-- React Component for Navigation --}}
-   {{-- <div id="blog-navbar-react"></div> --}}
-
+    
     <div class="container">
         @include('partials._messages')
         @yield('content')

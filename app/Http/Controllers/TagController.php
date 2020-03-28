@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Category;
+use App\Tag;
 use Illuminate\Http\Request;
 use Session;
-class CategoryController extends Controller
+
+
+class TagController extends Controller
 {
     public function __construct(){
         $this->middleware(['auth','verified']);
@@ -16,10 +18,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-
-        $categories = Category::all();
-
-        return view('categories.index')->withCategories($categories);
+        $tags = Tag::all();
+        return view('tags.index')->withTags($tags);
     }
 
     /**
@@ -30,17 +30,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        // save a new category and redirect to index
         $request->validate([
             'name' => 'required | max:255'
         ]);
-            $category = new Category;
-            $category->name = $request['name'];
-            $category->save();
 
-            Session::flash('success', 'New Category has been created');
-            
-            return redirect()->route('categories.index');
+        $tag = new Tag;
+        $tag->name = $request['name'];
+        $tag->save();
+
+        Session::flash('success', 'New Tag has been created');
+        return redirect()->route('tags.index');
 
     }
 
@@ -52,8 +51,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Category::findOrFail($id);
-        return view('categories.show')->withCategory($category);
+        $tag = Tag::findOrFail($id);
+        return view('tags.show')->withTag($tag);
     }
 
     /**
@@ -64,8 +63,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
-        return view('categories.edit')->withCategory($category);
+        $tag = Tag::findOrFail($id);
+        return view('tags.edit')->withTag($tag);
     }
 
     /**
@@ -77,19 +76,17 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-         // save a new category and redirect to index
-         $request->validate([
+     
+        $request->validate([
             'name' => 'required | max:255'
         ]);
-            $category = Category::findOrFail($id);
-            $category->name = $request['name'];
-            $category->save();
 
-            Session::flash('success', 'New Category has been Updated');
-            
-            return redirect()->route('categories.index');
+        $tag = Tag::findOrFail($id);
+        $tag->name = $request['name'];
+        $tag->save();
 
+        Session::flash('success', 'Tag has been Updated');
+        return redirect()->route('tags.index');   
     }
 
     /**
@@ -99,11 +96,13 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {        
-        $category = Category::findOrFail($id);
-        $category->delete();
-        Session::flash('success', 'The Category was successfully Deleted!');
-        return redirect()->route('categories.index');
+    {
+        $tag = Tag::findOrFail($id);
+        $tag->posts()->detach();
+        $tag->delete();
+
+        Session::flash('success', 'The Tag was successfully Deleted!');
+        return redirect()->route('tags.index');
 
     }
 }
