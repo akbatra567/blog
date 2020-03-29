@@ -1,9 +1,16 @@
 @extends('layouts.main')
-
+@section('stylesheets')
+    {{ Html::style('css/select2.min.css') }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.2.1/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector : 'textarea'
+        });
+    </script>
+@endsection
 @section('title', '| Edit Blog Post')
-
 @section('content')
-{!! Form::model($post, ['route' => ['posts.update', $post->id], 'method' => 'PUT']) !!}
+{!! Form::model($post, ['route' => ['posts.update', $post->id], 'method' => 'PUT', 'files' => true]) !!}
     <div class="row">
         <div class="col-md-8">
             {{ Form::label('title', "Title:") }}
@@ -11,6 +18,15 @@
             
             {{ Form::label('slug', "Slug:") }}
             {{ Form::text('slug', null, ['class' => 'form-control']) }}
+
+            {{ Form::label('category_id', 'Category:') }}
+            {{ Form::select('category_id', $categories, null, ['class' => 'form-control']) }}
+
+            {{ Form::label('tags', 'Tags:') }}
+            {{ Form::select('tags[]', $tags, null, ['class' => 'form-control select2-multi', 'multiple' => 'multiple']) }}
+
+            {{ Form::label('featured_image','Update Featured Image') }}
+            {{ Form::file('featured_image') }}
 
             {{ Form::label('body', "Body:") }}
             {{ Form::textarea('body', null, ['class' => 'form-control']) }}    
@@ -38,4 +54,11 @@
         </div>
     </div>
 {!! Form::close() !!}
+@endsection
+@section('scripts')
+    {{ Html::script('js/select2.min.js') }} 
+    <script>
+        $('.select2-multi').select2();
+
+    </script>
 @endsection

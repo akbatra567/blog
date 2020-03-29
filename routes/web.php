@@ -13,7 +13,8 @@
 
 Route::group(['middleware' => ['web']], function(){
 
-    Auth::routes(['verify' => 'true']);
+    // Auth::routes(['verify' => 'true']);
+    
     // Email Verification Routes 
     Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
     Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
@@ -34,12 +35,28 @@ Route::group(['middleware' => ['web']], function(){
     Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
     Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
+
+    // Categories
+    Route::resource('categories', 'CategoryController')->except('create');
+    // Tags
+    Route::resource('tags', 'TagController')->except('create');
+    
+    // Comments 
+    Route::post('comments/{post_id}', 'CommentController@store')->name('comments.store');
+    Route::get('comments/{id}/edit', 'CommentController@edit')->name('comments.edit');
+    Route::put('comments/{id}', 'CommentController@update')->name('comments.update');
+    Route::delete('comments/{id}', 'CommentController@destroy')->name('comments.destroy');
+    Route::get('comments/{id}/delete', 'CommentController@delete')->name('comments.delete');
+
     // Using slug
     Route::get('/blog/{slug}', 'BlogController@single')->name('blog.single')->where('slug', '[\w\d\-\_]+');
     Route::get('blog', 'BlogController@index')->name('blog.index');
 
     Route::get('/', 'PagesController@index')->name('home');
     Route::get('/about', 'PagesController@about')->name('about');
-    Route::get('/contact', 'PagesController@contact')->name('contact');
+
+    Route::get('/contact', 'PagesController@getContact')->name('contact');
+    Route::post('/contact', 'PagesController@postContact')->name('contact');
+
     Route::resource('posts', 'PostController');
 });
