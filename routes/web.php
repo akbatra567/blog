@@ -38,9 +38,15 @@ Route::group(['middleware' => ['web']], function(){
 
     // Categories
     Route::resource('categories', 'CategoryController')->except('create');
-
     // Tags
     Route::resource('tags', 'TagController')->except('create');
+    
+    // Comments 
+    Route::post('comments/{post_id}', 'CommentController@store')->name('comments.store');
+    Route::get('comments/{id}/edit', 'CommentController@edit')->name('comments.edit');
+    Route::put('comments/{id}', 'CommentController@update')->name('comments.update');
+    Route::delete('comments/{id}', 'CommentController@destroy')->name('comments.destroy');
+    Route::get('comments/{id}/delete', 'CommentController@delete')->name('comments.delete');
 
     // Using slug
     Route::get('/blog/{slug}', 'BlogController@single')->name('blog.single')->where('slug', '[\w\d\-\_]+');
