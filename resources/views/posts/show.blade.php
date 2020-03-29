@@ -8,7 +8,7 @@
             <h2 class="title">
                 {{ $post->title }}
             </h2>
-            <p class="lead"> {{ $post->body }}<p>
+            <p class="lead"> {!! $post->body !!}<p>
             <hr>
             <div class="tags">
                 Tags:

@@ -1,6 +1,12 @@
 @extends('layouts.main')
 @section('stylesheets')
     {{ Html::style('css/select2.min.css') }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.2.1/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector : 'textarea'
+        });
+    </script>
 @endsection
 @section('title', '| Edit Blog Post')
 @section('content')

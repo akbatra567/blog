@@ -13,8 +13,13 @@
 
 ### Blog for incubation cell
 
-# Future Scope
+## known Issues:
+1. Delete category
+2. View blogs by category and tag
+3. popular posts button not linked
 
+
+### Future Scope
 Api For:
     Reading articles.
     Writing Articles.

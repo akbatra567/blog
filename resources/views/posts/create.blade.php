@@ -1,6 +1,12 @@
 @extends('layouts.main')
 @section('stylesheets')
     {{ Html::style('css/select2.min.css') }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.2.1/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector : 'textarea'
+        });
+    </script>
 @endsection
 @section('title', '| Create New Post')
 @section('content')
@@ -32,7 +38,7 @@
 
 
                 {{ Form::label('body', 'Post Body:')  }}
-                {{  Form::textarea('body', null, ['class' => 'form-control' ])}}
+                {{  Form::textarea('body', null, ['class' => 'form-control'])}}
                 
                 {{  Form::submit('Create Post', ['class' => 'btn btn-success btn-lg', 'style' => 'margin-top: 20px;' ] )}}
             

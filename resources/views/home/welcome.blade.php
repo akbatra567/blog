@@ -17,7 +17,7 @@
                 @foreach ($posts as $post)
                     <div class="post">
                         <h2>{{ $post->title }}</h2>
-                        <p> {{ substr($post->body,0, 300) }}{{ strlen($post->body) > 100 ? "..." : "" }}</p>
+                        <p> {{ substr(strip_tags($post->body),0, 300) }}{{ strlen(strip_tags($post->body)) > 100 ? "..." : "" }}</p>
                     <a href="{{ route('blog.single', $post->slug) }}" class="btn btn-primary">Read More</a>
                     </div>
                     <hr>    
