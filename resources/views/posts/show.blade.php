@@ -5,6 +5,9 @@
 @section('content')
     <div class="row">
         <div class="col-md-8">
+            @if( !empty($post->image))
+            <img src="{{ asset('images/' . $post->image) }}" alt="{{ $post->title }}" width="500" />
+           @endif
             <h2 class="title">
                 {{ $post->title }}
             </h2>
